@@ -5,9 +5,9 @@ module Third
       @sport = sport
       @minutes = minutes
     end
-    def kcal
+    def kcal(weight)
       met = Third::Met.new(@sport).number
-      met * KCAL_MINUTE * @minutes
+      met * KCAL_MINUTE * @minutes * weight
     end
   end
 end

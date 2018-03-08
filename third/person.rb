@@ -7,8 +7,8 @@ module Third
       @weight = weight
     end
     def kcal_burns(sport, minutes)
-      sport_kcal = Third::SportCalculator.new(sport,minutes).kcal
-      sport_kcal * @weight
+      sport = Third::SportCalculator.new(sport,minutes)
+      sport.kcal(@weight)
     end
   end
 end
