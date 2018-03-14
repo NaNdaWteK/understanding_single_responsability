@@ -4,6 +4,9 @@ require_relative '../second/person'
 require_relative '../second/group'
 require_relative '../third/person'
 require_relative '../third/group'
+require_relative '../four/person'
+require_relative '../four/sport'
+require_relative '../four/met'
 
 describe 'Person' do
   context 'Burn' do
@@ -22,6 +25,19 @@ describe 'Person' do
       person = Third::Person.new(weight)
 
       expect(person.kcal_burns(sport, time)).to eq(346.50000000000006)
+    end
+    it 'Walking with dependency injection for classes' do
+      weight = 100
+      sport = 'Walk slowly'
+      time = 60
+      met = Four::Met.new(sport).number
+      args = {:met => met, :sport => 'Walk slowly'}
+      sport = Four::SportCalculator.new(args)
+      person = Four::Person.new(weight)
+
+      person.do_sport(sport)
+
+      expect(person.kcal_burns).to eq(346.50000000000006)
     end
   end
 end
